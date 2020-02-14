@@ -1,0 +1,7 @@
+.idea
+.cache
+.config
+.yarn
+
+.env
+docker-compose.yml

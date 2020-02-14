@@ -1,0 +1,50 @@
+version: '3.5'
+services:
+
+    nginx:
+        container_name: ${PROJECT_NAME}_nginx
+        build: .provision/nginx
+        volumes:
+            - ./${PROJECT_FOLDER}:/var/www
+            - .provision/nginx/conf.d/vhost.local.conf:/etc/nginx/conf.d/default.conf
+        ports:
+            - "8989:80"
+        links:
+            - php-fpm
+            - redis
+    php-fpm:
+        container_name: ${PROJECT_NAME}_php-fpm
+        build: .provision/php-fpm
+        volumes:
+            - ./${PROJECT_FOLDER}:/var/www
+        links:
+            - mysql
+
+    mysql:
+        container_name: ${PROJECT_NAME}_mysql
+        image: mysql:8.0
+        volumes:
+            - db_mysql:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: gerge54rgr4
+            MYSQL_DATABASE: ${PROJECT_NAME}
+            MYSQL_USER: ${PROJECT_NAME}
+            MYSQL_PASSWORD: 123456
+        ports:
+            - "13306:3306"
+        command: mysqld --sql_mode=""
+
+    redis:
+        container_name: ${PROJECT_NAME}_redis
+        image: redis:alpine
+
+    node:
+        container_name: ${PROJECT_NAME}_node
+        image: node:latest
+        volumes:
+            - ./${PROJECT_FOLDER}:/home/node
+        user: node
+        working_dir: /home/node
+volumes:
+    db_mysql:
+        name: ${PROJECT_NAME}
