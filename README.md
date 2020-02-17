@@ -21,28 +21,31 @@ Includes local end production settings.
     ````
     cp .env.example .env
     ````
-   Set PROJECT_NAME variable.  
-   Set PROJECT_FOLDER variable for example `backend` or whatever you want - by default it is main. 
+   Set `PROJECT_NAME` variable.  
+   Set `PROJECT_FOLDER` variable for example 'backend' or whatever you want - by default it is main. 
 3. **Configure main `docker-compose.yml` file**
    ````
    cp docker-compose.yml.local docker-compose.yml 
    ````
    Set variables for mysql container. Docker will create database and user at first UP.  
+   ````
    MYSQL_ROOT_PASSWORD:  
    MYSQL_DATABASE: ${PROJECT_NAME}  
    MYSQL_USER: ${PROJECT_NAME}  
    MYSQL_PASSWORD:
-4. **Configure App `.env`**
+   ````
+4. **Configure Application `.env`**
     ````
     # By default ${PROJECT_FOLDER}=main 
     cp ${PROJECT_FOLDER}/.env.example cp ${PROJECT_FOLDER}/.env 
     ````
    Set variables from *step 3* 
-       DB_HOST=mysql  
-       DB_DATABASE=  
-       DB_USERNAME=  
-       DB_PASSWORD=  
-
+   ````
+   DB_HOST=mysql  
+   DB_DATABASE=  
+   DB_USERNAME=  
+   DB_PASSWORD=  
+   ````
 5. **Run Application**
    ````
    docker-compose up -d --build
@@ -58,5 +61,5 @@ Includes local end production settings.
    # Migrate
    docker-compose exec -uwww-data php-fpm php artisan migrate
    ````
-6. **Run http://localhost:8989/register**   
+6. **Launch http://localhost:8989/register**   
    
