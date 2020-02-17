@@ -11,7 +11,7 @@ services:
             - "8989:80"
         links:
             - php-fpm
-            - redis
+
     php-fpm:
         container_name: ${PROJECT_NAME}_php-fpm
         build: .provision/php-fpm
@@ -19,6 +19,7 @@ services:
             - ./${PROJECT_FOLDER}:/var/www
         links:
             - mysql
+            - redis
 
     mysql:
         container_name: ${PROJECT_NAME}_mysql
@@ -26,10 +27,10 @@ services:
         volumes:
             - db_mysql:/var/lib/mysql
         environment:
-            MYSQL_ROOT_PASSWORD: gerge54rgr4
+            MYSQL_ROOT_PASSWORD:
             MYSQL_DATABASE: ${PROJECT_NAME}
             MYSQL_USER: ${PROJECT_NAME}
-            MYSQL_PASSWORD: 123456
+            MYSQL_PASSWORD:
         ports:
             - "13306:3306"
         command: mysqld --sql_mode=""

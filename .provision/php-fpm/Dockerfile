@@ -12,21 +12,23 @@ RUN apt-get update && \
         libpng-dev \
         libfreetype6-dev \
         libssl-dev \
-        libmcrypt-dev \
         openssh-server \
         libmagickwand-dev \
         git \
         cron \
         nano \
         libxml2-dev
-
+        libzip-dev \
+        zip \
+        unzip
 
 RUN docker-php-ext-install \
         soap \
         pcntl \
         pdo_mysql \
         pdo_pgsql \
-        bcmath
+        bcmath \
+        zip
 
 RUN pecl install imagick && \
     docker-php-ext-enable imagick
