@@ -17,7 +17,7 @@ RUN apt-get update && \
         git \
         cron \
         nano \
-        libxml2-dev
+        libxml2-dev \
         libzip-dev \
         zip \
         unzip
