@@ -1,1 +1,1 @@
-FROM nginx:1.14
+FROM nginx:stable

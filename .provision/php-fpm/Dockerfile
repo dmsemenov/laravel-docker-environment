@@ -43,7 +43,7 @@ RUN docker-php-ext-install exif && \
         --enable-exif
 
 # Install the xdebug extension
-RUN pecl install xdebug && docker-php-ext-enable xdebug
+RUN pecl install xdebug-2.9.8 && docker-php-ext-enable xdebug
 # Copy xdebug configration for remote debugging
 COPY ./xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 

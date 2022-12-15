@@ -2,16 +2,17 @@
 Docker environment configuration for Laravel development.
 Contains settings for local development for new project or already existing.   
 >Repository provides:
-> - Laravel 6
-> - PHP 7.4
-> - Nginx: 1.14
-> - MySql 8.0
-> - Redis
-> - Node latest
-> - LetsEncrypt for production
+- Laravel ^8.0
+- PHP 7.4
+- Nginx: stable
+- MySql 8.0
+- Xdebug 2.9.8
+- Redis
+- Node: latest
+- LetsEncrypt for production
 
 ### Installation
-**Note:** Local environment tested only on Ubuntu. Feel free to create an Issue for other OS.   
+**Note:** Local environment tested on Ubuntu and macOS. Feel free to create an Issue for other OS.   
 1. **Clone repository**
     ````
     mkdir {YOUR_NEW_FOLDER}
@@ -25,29 +26,31 @@ Contains settings for local development for new project or already existing.
    Set `PROJECT_NAME` variable.  
    Set `PROJECT_FOLDER` variable for example 'backend' or whatever you want. By default it is `main`.
 
-3. **Install Application**  
-   Install or copy your existing application to `PROJECT_FOLDER`.  
-   ````
-   # Install new
-   composer create-project --prefer-dist laravel/laravel `PROJECT_FOLDER`
-   ````
+
 3. **Configure main `docker-compose.yml` file**
    ````
    # Local development
    cp docker-compose.yml.local docker-compose.yml
    ````
-   Set variables for mysql container. Docker will create database and user at first UP.  
+   Set variables for mysql container. Docker will create database and user at first UP.
    ````
    MYSQL_ROOT_PASSWORD:  
    MYSQL_DATABASE: ${PROJECT_NAME}  
    MYSQL_USER: ${PROJECT_NAME}  
    MYSQL_PASSWORD:
    ````
+
+3. **Install Application**  
+   Install or copy your existing application to `PROJECT_FOLDER`.  
+   ````
+   # Run containers
+   docker-compose up -d --build
+   # Install new
+   docker-compose exec php-fpm composer create-project --prefer-dist laravel/laravel .
+   ````
+
 4. **Configure Application `.env`**
-    ````
-    # By default ${PROJECT_FOLDER}=main 
-    cp ${PROJECT_FOLDER}/.env.example cp ${PROJECT_FOLDER}/.env 
-    ````
+
    Set variables from *step 3* 
    ````
    DB_HOST=mysql  
@@ -58,10 +61,9 @@ Contains settings for local development for new project or already existing.
 5. **Run Application**
    ````
    # Run containers
-   docker-compose up -d --build
+   docker-compose up -d
    
-   docker-compose exec php-fpm php artisan key:generate
-   # Base UI
+   # Base UI. If needed!
    docker-compose exec -uwww-data php-fpm composer require laravel/ui --dev
    docker-compose exec -uwww-data php-fpm php artisan ui bootstrap --auth
    
