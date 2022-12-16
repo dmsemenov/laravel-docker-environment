@@ -2,11 +2,11 @@
 Docker environment configuration for Laravel development.
 Contains settings for local development for new project or already existing.   
 >Repository provides:
-- Laravel ^8.0
-- PHP 7.4
+- Laravel ^9.0
+- PHP 8.2
 - Nginx: stable
 - MySql 8.0
-- Xdebug 2.9.8
+- Xdebug 3.2.0
 - Redis
 - Node: latest
 - LetsEncrypt for production

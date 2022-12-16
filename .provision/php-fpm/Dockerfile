@@ -1,5 +1,5 @@
 # Based on https://github.com/Cyber-Duck/php-fpm-laravel/tree/7.2
-FROM php:7.4-fpm
+FROM php:8.2-fpm
 
 ENV XDEBUG="false"
 
@@ -43,7 +43,7 @@ RUN docker-php-ext-install exif && \
         --enable-exif
 
 # Install the xdebug extension
-RUN pecl install xdebug-2.9.8 && docker-php-ext-enable xdebug
+RUN pecl install xdebug-3.2.0 && docker-php-ext-enable xdebug
 # Copy xdebug configration for remote debugging
 COPY ./xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
