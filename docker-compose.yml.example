@@ -6,11 +6,10 @@ services:
         build: .provision/nginx
         volumes:
             - ./${PROJECT_FOLDER}:/var/www
-            - .provision/nginx/conf.d/vhost.prod.conf:/etc/nginx/conf.d/default.conf
+            - .provision/nginx/conf.d/vhost.conf:/etc/nginx/conf.d/default.conf
             # - .provision/nginx/.htpasswd:/etc/nginx/.htpasswd
         ports:
-            - "80:80"
-            - "443:443"
+            - "8989:80"
         links:
             - php-fpm
 
