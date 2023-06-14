@@ -11,6 +11,8 @@ Contains settings for local development for new project or already existing.
 - Redis
 - Node: latest
 
+>Note: If you want to use PHP 7 ``git clone --depth 1 --branch php-7.x git@github.com:dmsemenov/laravel-docker-environment.git``
+  
 ### Installation
 **Note:** Local environment tested on Ubuntu and macOS. Feel free to create an Issue for other OS.   
 1. **Clone repository**
